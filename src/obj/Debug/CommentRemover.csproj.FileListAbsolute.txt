@@ -106,7 +106,6 @@ C:\Users\evgen\Source\Repos\CommentRemover\src\obj\Debug\VSCT.read.1.tlog
 C:\Users\evgen\Source\Repos\CommentRemover\src\obj\Debug\VSCT.write.1.tlog
 C:\Users\evgen\Source\Repos\CommentRemover\src\obj\Debug\resources.json
 C:\Users\evgen\Source\Repos\CommentRemover\src\obj\Debug\ctoFiles.json
-C:\Users\evgen\Source\Repos\CommentRemover\src\obj\Debug\_EmptyResource.resources.original
 C:\Users\evgen\Source\Repos\CommentRemover\src\obj\Debug\mergeCto.cache
 C:\Users\evgen\Source\Repos\CommentRemover\src\obj\Debug\CommentRemover.csproj.CoreCompileInputs.cache
 C:\Users\evgen\Source\Repos\CommentRemover\src\obj\Debug\CommentRemover.csproj.CopyComplete

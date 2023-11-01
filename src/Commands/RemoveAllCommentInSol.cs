@@ -21,21 +21,7 @@ namespace CommentRemover
         {
             RegisterCommand(PackageGuids.guidPackageCmdSet, PackageIds.RemoveAllCommentsInSol);
         }
-        static readonly string[] exceptDir = { "obj", "debug", "bin" };
-        /// <summary>
-        /// Рекурсивный метод извлечения перечня файлов
-        /// </summary>
-        /// <param name="dir"></param>
-        /// <returns></returns>
-        internal IEnumerable<String> getDirFiles(string dir)
-        {
-            List<String> files = new List<String>();
-            files.AddRange(Directory.GetFiles(dir, "*.cs"));
-            foreach (var sdir in Directory.GetDirectories(dir))
-                if (!exceptDir.Contains(Path.GetFileName(sdir).ToLower()))
-                    files.AddRange(getDirFiles(sdir));
-            return files;
-        }
+
 
         internal void clearCurFile()
         {
@@ -47,8 +33,6 @@ namespace CommentRemover
 
             try
             {
-                //DTE.UndoContext.Open(button.Text);
-
                 DeleteFromBuffer(view, mappingSpans);
             }
             catch (Exception ex)
@@ -62,7 +46,11 @@ namespace CommentRemover
 
         }
 
-        //private const String SfGuid = "{66A26720-8FB5-11D2-AA7E-00C04F688DDE}";
+        /// <summary>
+        /// Обработка проекта или директории проекта
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
         private List<ProjectItem> getFiles(ProjectItems items)
         {
             if (items == null) return new List<ProjectItem>();
@@ -76,7 +64,11 @@ namespace CommentRemover
             }
             return fls;
         }
-
+        /// <summary>
+        /// Обработка директории решения
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         private List<ProjectItem> processSolutionFolder(Project p)
         {
             List<ProjectItem> fls = new List<ProjectItem>();
@@ -100,20 +92,15 @@ namespace CommentRemover
 
             var sBar = DTE.StatusBar;
             sBar.Text = "Очистка...";
-            var toProc = fls.Where(f => f.Name.EndsWith(".cs")).ToList();
+            var toProc = fls.Where(f => f.Name.EndsWith(".cs") && !f.Name.EndsWith(".Designer.cs")).ToList();
             int i = 0;
             foreach (var file in toProc)
             {
-                //var window = DTE.ItemOperations.OpenFile(allFiles[i]);
-                var window = file.Open();
+                var window = file.Open(Constants.vsViewKindCode);
                 window.Activate();
-                //DTE.ExecuteCommand("File.OpenFile", );
                 clearCurFile();
                 file.Document.Save();
                 file.Document.Close();
-                //DTE.ExecuteCommand("File.Save");
-                //window.Close();
-                //DTE.ExecuteCommand("File.Close");
                 sBar.Progress(true, Label: "", AmountCompleted: i++, Total: toProc.Count);
             }
             sBar.Progress(false);

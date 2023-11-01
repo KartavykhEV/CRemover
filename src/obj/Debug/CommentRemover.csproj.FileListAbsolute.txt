@@ -116,3 +116,4 @@ C:\Users\evgen\Source\Repos\CommentRemover\src\obj\Debug\CommentRemover.latest.p
 C:\Users\evgen\Source\Repos\CommentRemover\src\obj\Debug\extension.vsixmanifest
 C:\Users\evgen\Source\Repos\CommentRemover\src\obj\Debug\files.json
 C:\Users\evgen\Source\Repos\CommentRemover\src\obj\Debug\createTemplateManifests.cache
+C:\Users\evgen\source\repos\CommentRemover\src\obj\Debug\_EmptyResource.resources.original
